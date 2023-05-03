@@ -1,2 +1,2 @@
 # Burgess-Packages
-Packages for OpenWRT
+Packages for OpenWRT, the same packages in LEDE has been removed.
