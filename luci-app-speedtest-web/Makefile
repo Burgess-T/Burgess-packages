@@ -13,6 +13,8 @@ PKG_VERSION:=1.0
 PKG_RELEASE:=1
 PKG_MAINTAINER:=<https://github.com/ZeaKyX/luci-app-speedtest-web>
 
+DEPENDS:=upx/host
+
 include $(TOPDIR)/feeds/luci/luci.mk
 
 # call BuildPackage - OpenWrt buildroot signature
