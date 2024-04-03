@@ -91,6 +91,12 @@ msgstr "路由器本机代理"
 msgid "When selected, localhost can transparent proxy."
 msgstr "当勾选时，路由器本机可以透明代理。"
 
+msgid "Client Proxy"
+msgstr "客户端代理"
+
+msgid "When selected, devices in LAN can transparent proxy. Otherwise, it will not be proxy. But you can still use access control to allow the designated device to proxy."
+msgstr "当勾选时，局域网内的设备可以透明代理。否则，将不代理。但您仍然可以使用访问控制允许指定的设备代理。"
+
 msgid "Socks Config"
 msgstr "Socks配置"
 
@@ -139,6 +145,15 @@ msgstr "用于 DNS 查询时通知 DNS 服务器，客户端所在的地理位�
 msgid "This feature requires the DNS server to support the Edns Client Subnet (RFC7871)."
 msgstr "此功能需要 DNS 服务器支持 EDNS Client Subnet（RFC7871）。"
 
+msgid "Remote DNS Outbound"
+msgstr "远程 DNS 出站"
+
+msgid "Remote"
+msgstr "远程"
+
+msgid "Direct"
+msgstr "直连"
+
 msgid "Direct Query Strategy"
 msgstr "直连查询策略"
 
@@ -151,8 +166,14 @@ msgstr "需要代理的分流规则域名使用 FakeDNS。"
 msgid "Domain Override"
 msgstr "域名重写"
 
-msgid "Clear IPSET"
-msgstr "清空 IPSET"
+msgid "Direct DNS result write to IPSet"
+msgstr "直连 DNS 解析结果写入到 IPSet"
+
+msgid "Perform the matching direct domain name rules into IP to IPSet/NFTSet, and then connect directly (not entering the core). Maybe conflict with some special circumstances."
+msgstr "将匹配到的直连规则的域名解析IP写入到 IPSet/NFTSet，然后直连（不进入内核）。可能和某些特殊情况冲突。"
+
+msgid "Clear IPSet"
+msgstr "清空 IPSet"
 
 msgid "Try this feature if the rule modification does not take effect."
 msgstr "如果修改规则后没有生效，请尝试此功能。"
@@ -187,6 +208,39 @@ msgstr "你确定要恢复吗？"
 msgid "Are you sure to hide?"
 msgstr "你确定要隐藏吗？"
 
+msgid "DNS related issues:"
+msgstr "DNS相关问题："
+
+msgid "Certain browsers such as Chrome have built-in DNS service, which may affect DNS resolution settings. You can go to 'Settings -> Privacy and security -> Use secure DNS' menu to turn it off."
+msgstr "某些浏览器如Chrome等内置此功能,这会影响设置的DNS解析。您可以进入 '设置->私隐和安全->使用安全DNS' 菜单,将其关闭。"
+
+msgid "If you are unable to access the internet after reboot, please try clearing the cache of your terminal devices (make sure to close all open browser application windows first, this step is especially important):"
+msgstr "如果在重启后无法上网,请尝试清除终端设备的缓存（先关闭所有正在使用的浏览器应用程序，这一步尤其重要）："
+
+msgid "For Windows systems, open Command Prompt and run the command 'ipconfig /flushdns'."
+msgstr "对于Windows系统,请在命令提示符中运行命令 'ipconfig /flushdns'."
+
+msgid "For Mac systems, open Terminal and run the command 'sudo killall -HUP mDNSResponder'."
+msgstr "对于Mac系统，在终端中运行命令 'sudo killall -HUP mDNSResponder'."
+
+msgid "For mobile devices, you can clear it by reconnecting to the network, such as toggling Airplane Mode and reconnecting to WiFi."
+msgstr "对于移动设备,可通过重新接入网络的方式清除。比如开关一次飞行模式,重新连接WiFi。"
+
+msgid "Please make sure your device's network settings point both the DNS server and default gateway to this router, to ensure DNS queries are properly routed."
+msgstr "请确认您设备的网络设置,客户端DNS服务器和默认网关应均指向本路由器,以确保DNS查询正确路由。"
+
+msgid "Restore to default configuration:"
+msgstr "恢复默认配置："
+
+msgid "Browser access:"
+msgstr "浏览器访问："
+
+msgid "Hide in main menu:"
+msgstr "在主菜单中隐藏："
+
+msgid "Show in main menu:"
+msgstr "在主菜单中显示："
+
 msgid "DNS Export Of Multi WAN"
 msgstr "国内DNS指定解析出口"
 
@@ -214,8 +268,11 @@ msgstr "添加节点"
 msgid "Add the node via the link"
 msgstr "通过链接添加节点"
 
-msgid "SS/SSR/Vmess/VLESS/Trojan/Hysteria Link"
-msgstr "SS/SSR/Vmess/VLESS/Trojan/Hysteria 链接"
+msgid "Share Link"
+msgstr "分享链接"
+
+msgid "Not a subscription link!!!"
+msgstr "不是订阅链接！！！"
 
 msgid "Please enter the correct link."
 msgstr "请输入正确的链接。"
@@ -274,14 +331,14 @@ msgstr "添加方式"
 msgid "Type"
 msgstr "类型"
 
-msgid "Balancing"
+msgid "_balancing"
 msgstr "负载均衡"
 
-msgid "Xray_balancing"
-msgstr "Xray 负载均衡"
+msgid "_shunt"
+msgstr "分流"
 
-msgid "V2ray_balancing"
-msgstr "V2ray 负载均衡"
+msgid "Balancing"
+msgstr "负载均衡"
 
 msgid "Balancing Strategy"
 msgstr "负载均衡策略"
@@ -306,12 +363,6 @@ msgstr "发起探测的间隔。每经过这个时间，就会对一个服务器
 
 msgid "Shunt"
 msgstr "分流"
-
-msgid "Xray_shunt"
-msgstr "Xray 分流"
-
-msgid "V2ray_shunt"
-msgstr "V2ray 分流"
 
 msgid "Preproxy"
 msgstr "前置代理"
@@ -367,6 +418,9 @@ msgstr "导入分享URL"
 msgid "Build Share URL"
 msgstr "导出分享URL"
 
+msgid "Generate QRCode"
+msgstr "生成二维码"
+
 msgid "Import Finished"
 msgstr "导入完成："
 
@@ -418,6 +472,9 @@ msgstr "传输层插件"
 msgid "Shadowsocks secondary encryption"
 msgstr "Shadowsocks 二次加密"
 
+msgid "Obfs Type"
+msgstr "混淆类型"
+
 msgid "Obfs Password"
 msgstr "混淆密码"
 
@@ -426,6 +483,15 @@ msgstr "认证类型"
 
 msgid "Auth Password"
 msgstr "认证密码"
+
+msgid "Commands the client to use the BBR flow control algorithm"
+msgstr "命令客户端使用 BBR 流量控制算法"
+
+msgid "PinSHA256"
+msgstr "PinSHA256"
+
+msgid "Certificate fingerprint"
+msgstr "证书指纹"
 
 msgid "Max upload Mbps"
 msgstr "最大上行(Mbps)"
@@ -439,8 +505,14 @@ msgstr "QUIC 流接收窗口"
 msgid "QUIC connection receive window"
 msgstr "QUIC 连接接收窗口"
 
+msgid "QUIC concurrent bidirectional streams"
+msgstr "QUIC 并发双向流的最大数量"
+
 msgid "Disable MTU detection"
 msgstr "禁用 MTU 检测"
+
+msgid "ignoreClientBandwidth"
+msgstr "忽略客户端带宽设置"
 
 msgid "Lazy Start"
 msgstr "延迟启动"
@@ -451,23 +523,17 @@ msgstr "加密"
 msgid "Latency"
 msgstr "延迟"
 
-msgid "Show Add Mode"
-msgstr "显示添加方式"
-
-msgid "Show Group"
-msgstr "显示组"
-
-msgid "Group"
-msgstr "组"
-
-msgid "Auto Ping"
-msgstr "自动Ping"
+msgid "Automatic detection delay"
+msgstr "自动检测延迟"
 
 msgid "Show server address and port"
 msgstr "显示服务器地址和端口"
 
-msgid "Availability test"
-msgstr "可用性测试"
+msgid "URL Test"
+msgstr "URL 测试"
+
+msgid "Test"
+msgstr "测试"
 
 msgid "Node num"
 msgstr "节点数量"
@@ -523,6 +589,9 @@ msgstr "UDP不转发端口"
 msgid "Fill in the ports you don't want to be forwarded by the agent, with the highest priority."
 msgstr "填写你不希望被代理转发的端口，优先级最高。"
 
+msgid "If you don't want to let the device in the list to go proxy, please choose all."
+msgstr "如果您不想让列表中的设备走代理，请选择全部。"
+
 msgid "TCP Proxy Drop Ports"
 msgstr "TCP转发屏蔽端口"
 
@@ -565,17 +634,14 @@ msgstr "劫持ICMP (PING)"
 msgid "Hijacking ICMPv6 (IPv6 PING)"
 msgstr "劫持ICMPv6 (IPv6 PING)"
 
-msgid "Sniffing (V2Ray/Xray)"
-msgstr "流量嗅探 (V2ray/Xray)"
+msgid "Sniffing"
+msgstr "流量嗅探"
 
-msgid "When using the V2ray/Xray shunt, must be enabled, otherwise the shunt will invalid."
-msgstr "使用 V2Ray/Xray 分流时，必须启用，否则分流将无效。"
+msgid "When using the shunt, must be enabled, otherwise the shunt will invalid."
+msgstr "使用分流时，必须启用，否则分流将无效。"
 
-msgid "Sniffing Route Only (Xray)"
-msgstr "流量嗅探只供路由使用 (Xray)"
-
-msgid "When enabled, the server not will resolve the domain name again."
-msgstr "启用后，服务器不会再次解析域名。"
+msgid "Sniffing Route Only"
+msgstr "流量嗅探只供路由使用"
 
 msgid "TCP Proxy Way"
 msgstr "TCP代理方式"
@@ -658,8 +724,8 @@ msgstr "内置实现"
 msgid "Health Check Inter"
 msgstr "健康检查节点间隔时间"
 
-msgid "When the availability test is used, the load balancing node will be converted into a Socks node. when node list set customizing, must be a Socks node, otherwise the health check will be invalid."
-msgstr "当使用可用性测试时，负载均衡节点将转换成Socks节点。下面的节点列表自定义时必须为Socks节点，否则健康检查将无效。"
+msgid "When the URL test is used, the load balancing node will be converted into a Socks node. when node list set customizing, must be a Socks node, otherwise the health check will be invalid."
+msgstr "当使用URL测试时，负载均衡节点将转换成Socks节点。下面的节点列表自定义时必须为Socks节点，否则健康检查将无效。"
 
 msgid "Add a node, Export Of Multi WAN Only support Multi Wan. Load specific gravity range 1-256. Multiple primary servers can be load balanced, standby will only be enabled when the primary server is offline! Multiple groups can be set, Haproxy port same one for each group."
 msgstr "添加节点，指定出口功能是为多WAN用户准备的。负载比重范围1-256。多个主服务器可以负载均衡，备用只有在主服务器离线时才会启用！可以设置多个组，负载均衡端口相同则为一组。"
@@ -699,6 +765,9 @@ msgstr "启用自定义规则地址"
 
 msgid "Rule status"
 msgstr "规则版本"
+
+msgid "Manually update"
+msgstr "手动更新"
 
 msgid "Enable auto update rules"
 msgstr "开启自动更新规则"
@@ -783,12 +852,6 @@ msgstr "%s 程序路径"
 
 msgid "%s Client App Path"
 msgstr "%s 客户端程序路径"
-
-msgid "Trojan-Go Version API"
-msgstr "Trojan-Go 版本 API"
-
-msgid "alternate API URL for version checking"
-msgstr "用于版本检查的 API URL"
 
 msgid "Node Subscribe"
 msgstr "节点订阅"
@@ -904,6 +967,12 @@ msgstr "配置路由etc/hosts文件，如果你不知道自己在做什么，请
 msgid "These had been joined ip addresses will be block. Please input the ip address or ip address segment, every line can input only one ip address."
 msgstr "加入的IP段将屏蔽。可输入IP地址或地址段，每个地址段一行。"
 
+msgid "Inbound Tag"
+msgstr "入站标签"
+
+msgid "Transparent proxy"
+msgstr "透明代理"
+
 msgid "Not valid domain name, please re-enter!"
 msgstr "不是有效域名，请重新输入！"
 
@@ -952,9 +1021,6 @@ msgstr "从文件中加载 IP: 形如'ext:file:tag'，必须以ext:（小写）�
 msgid "Clear logs"
 msgstr "清空日志"
 
-msgid "Only recommend to use with VLESS-TCP-XTLS-Vision."
-msgstr "只推荐与 VLESS-TCP-XTLS-Vision 搭配使用。"
-
 msgid "Password"
 msgstr "密码"
 
@@ -963,9 +1029,6 @@ msgstr "IV 检查"
 
 msgid "UDP over TCP"
 msgstr "TCP 封装 UDP"
-
-msgid "Need Xray-core or sing-box as server side."
-msgstr "需要 Xray-core 或者 sing-box 作为服务器端。"
 
 msgid "Connection Timeout"
 msgstr "连接超时时间"
@@ -1000,17 +1063,8 @@ msgstr "插件名称"
 msgid "Plugin Arguments"
 msgstr "插件参数"
 
-msgid "Brook Protocol"
-msgstr "Brook协议"
-
-msgid "Use TLS"
-msgstr "使用TLS"
-
 msgid "Naiveproxy Protocol"
 msgstr "Naiveproxy协议"
-
-msgid "V2ray Protocol"
-msgstr "V2ray协议"
 
 msgid "User Level"
 msgstr "用户等级(level)"
@@ -1057,11 +1111,56 @@ msgstr "允许不安全连接"
 msgid "Whether unsafe connections are allowed. When checked, Certificate validation will be skipped."
 msgstr "是否允许不安全连接。当勾选时，将跳过证书验证。"
 
-msgid "SS AEAD Node Use Type"
-msgstr "SS AEAD节点使用类型"
+msgid "%s Node Use Type"
+msgstr "%s 节点使用类型"
 
-msgid "Trojan Node Use Type"
-msgstr "Trojan节点使用类型"
+msgid "Set the TUIC proxy server ip address"
+msgstr "指定远程TUIC服务器IP"
+
+msgid "TUIC User Password For Connect Remote Server"
+msgstr "用于远程TUIC服务器连接的密码"
+
+msgid "TUIC UserName For Local Socks"
+msgstr "用于本地Socks服务器连接的用户名"
+
+msgid "TUIC Password For Local Socks"
+msgstr "用于本地Socks服务器连接的密码"
+
+msgid "UDP relay mode"
+msgstr "UDP中继模式"
+
+msgid "Congestion control algorithm"
+msgstr "拥塞控制算法"
+
+msgid "Heartbeat interval(second)"
+msgstr "保活心跳包发送间隔（单位：秒）"
+
+msgid "Timeout for establishing a connection to server(second)"
+msgstr "连接超时时间（单位：秒）"
+
+msgid "Garbage collection interval(second)"
+msgstr "UDP数据包片残片清理间隔（单位：秒）"
+
+msgid "Garbage collection lifetime(second)"
+msgstr "UDP数据包残片在服务器的保留时间（单位：秒）"
+
+msgid "Disable SNI"
+msgstr "关闭SNI服务器名称指示"
+
+msgid "Enable 0-RTT QUIC handshake"
+msgstr "客户端启用 0-RTT QUIC 连接握手"
+
+msgid "TUIC send window"
+msgstr "发送窗口（无需确认即可发送的最大字节数：默认8Mb*2）"
+
+msgid "TUIC receive window"
+msgstr "接收窗口（无需确认即可接收的最大字节数：默认8Mb）"
+
+msgid "TUIC Maximum packet size the socks5 server can receive from external, in bytes"
+msgstr "TUIC socks5 服务器可以从外部接收的最大数据包大小（以字节为单位）"
+
+msgid "Set if the listening socket should be dual-stack"
+msgstr "设置监听套接字为双栈"
 
 msgid "<br />none: default, no masquerade, data sent is packets with no characteristics.<br />srtp: disguised as an SRTP packet, it will be recognized as video call data (such as FaceTime).<br />utp: packets disguised as uTP will be recognized as bittorrent downloaded data.<br />wechat-video: packets disguised as WeChat video calls.<br />dtls: disguised as DTLS 1.2 packet.<br />wireguard: disguised as a WireGuard packet. (not really WireGuard protocol)"
 msgstr "<br />none：默认值，不进行伪装，发送的数据是没有特征的数据包。<br />srtp：伪装成 SRTP 数据包，会被识别为视频通话数据（如 FaceTime）。<br />utp：伪装成 uTP 数据包，会被识别为 BT 下载数据。<br />wechat-video：伪装成微信视频通话的数据包。<br />dtls：伪装成 DTLS 1.2 数据包。<br />wireguard：伪装成 WireGuard 数据包。(并不是真正的 WireGuard 协议)"
@@ -1107,9 +1206,6 @@ msgstr "显示节点检测"
 
 msgid "Show Show IP111"
 msgstr "显示IP111"
-
-msgid "The MTProto protocol must be 32 characters and can only contain characters from 0 to 9 and a to f."
-msgstr "MTProto 协议必须为 32 个字符，仅可包含 0 到 9 和 a 到 f 之间的字符。"
 
 msgid "Destination protocol"
 msgstr "目标协议"
@@ -1213,8 +1309,8 @@ msgstr "无"
 msgid "You did not fill in the %s path. Please save and apply then update manually."
 msgstr "您没有填写 %s 路径。请保存应用后再手动更新。"
 
-msgid "Not installed unzip, Can't unzip!"
-msgstr "未安装unzip，无法解压。"
+msgid "Not installed %s, Can't unzip!"
+msgstr "未安装 %s，无法解压。"
 
 msgid "Can't determine ARCH, or ARCH not supported."
 msgstr "无法确认ARCH架构，或是不支持。"
@@ -1258,6 +1354,9 @@ msgstr "XUDP 最大并发连接数"
 msgid "Mux idle timeout"
 msgstr "最大闲置时间"
 
+msgid "Padding"
+msgstr "填充"
+
 msgid "Enable early data"
 msgstr "启用前置数据"
 
@@ -1288,17 +1387,23 @@ msgstr "初始窗口大小"
 msgid "No Sniffing Lists"
 msgstr "不进行流量嗅探的域名列表"
 
-msgid "Hosts added into No Sniffing Lists will not resolve again on server (Xray only)."
-msgstr "加入的域名不会再次在服务器解析（仅适用于Xray）。"
+msgid "Hosts added into No Sniffing Lists will not resolve again on server."
+msgstr "加入的域名不会再次在服务器解析。"
 
-msgid "Buffer Size (Xray)"
-msgstr "缓冲区大小（Xray）"
+msgid "Buffer Size"
+msgstr "缓冲区大小"
 
 msgid "Buffer size for every connection (kB)"
 msgstr "每一个连接的缓冲区大小（kB）"
 
+msgid "Custom geoip Path"
+msgstr "自定义geoip文件路径"
+
 msgid "Custom geoip URL"
 msgstr "自定义geoip文件更新链接"
+
+msgid "Custom geosite Path"
+msgstr "自定义geosite文件路径"
 
 msgid "Custom geosite URL"
 msgstr "自定义geosite文件更新链接"
@@ -1314,3 +1419,75 @@ msgstr "端口跳跃时间 "
 
 msgid "Additional ports for hysteria hop"
 msgstr "端口跳跃额外端口"
+
+msgid "Remove resource files"
+msgstr "删除资源文件"
+
+msgid "Sing-Box will automatically download resource files when starting, you can use this feature achieve upgrade resource files."
+msgstr "Sing-Box 会在启动时自动下载资源文件，您可以使用此功能实现升级资源文件。"
+
+msgid "Override the connection destination address"
+msgstr "覆盖连接目标地址"
+
+msgid "Override the connection destination address with the sniffed domain."
+msgstr "用探测出的域名覆盖连接目标地址。"
+
+msgid "Handshake Server"
+msgstr "握手服务器"
+
+msgid "Handshake Server Port"
+msgstr "握手服务器端口"
+
+msgid "Protocol parameter. Will waste traffic randomly if enabled."
+msgstr "协议参数。 如果启用会随机浪费流量。"
+
+msgid "Protocol parameter. Enable length block encryption."
+msgstr "协议参数。启用长度块加密。"
+
+msgid "ECH Config"
+msgstr "ECH 密钥"
+
+msgid "ECH Key"
+msgstr "ECH 配置"
+
+msgid "PQ signature schemes"
+msgstr "后量子对等证书签名方案"
+
+msgid "Disable adaptive sizing of TLS records"
+msgstr "禁用 TLS 记录的自适应大小调整"
+
+msgid "Enable Multipath TCP, need to be enabled in both server and client configuration."
+msgstr "启用 Multipath TCP，需在服务端和客户端配置中同时启用。"
+
+msgid "Fragment"
+msgstr "分片"
+
+msgid "TCP fragments, which can deceive the censorship system in some cases, such as bypassing SNI blacklists."
+msgstr "TCP 分片，在某些情况下可以欺骗审查系统，比如绕过 SNI 黑名单。"
+
+msgid "Fragment Packets"
+msgstr "分片方式"
+
+msgid " \"1-3\" is for segmentation at TCP layer, applying to the beginning 1 to 3 data writes by the client. \"tlshello\" is for TLS client hello packet fragmentation."
+msgstr " \"1-3\" 是 TCP 的流切片，应用于客户端第 1 至第 3 次写数据。\"tlshello\" 是 TLS 握手包切片。"
+
+msgid "Fragment Length"
+msgstr "分片包长"
+
+msgid "Fragmented packet length (byte)"
+msgstr "分片包长 (byte)"
+
+msgid "Fragment Interval"
+msgstr "分片间隔"
+
+msgid "Fragmentation interval (ms)"
+msgstr "分片间隔（ms）"
+
+msgid "If is domain name, The requested domain name will be resolved to IP before connect."
+msgstr "如果是域名，域名将在请求发出之前解析为 IP。"
+
+msgid "Landing node"
+msgstr "落地节点"
+
+msgid "Only support a layer of proxy."
+msgstr "仅支持一层代理。"

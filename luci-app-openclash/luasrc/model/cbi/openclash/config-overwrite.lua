@@ -135,6 +135,27 @@ o = s:taboption("dns", Flag, "enable_custom_dns", font_red..bold_on..translate("
 o.description = font_red..bold_on..translate("Set OpenClash Upstream DNS Resolve Server")..bold_off..font_off
 o.default = 0
 
+---- Fallback DNS Proxy Group
+o = s:taboption("dns", Value, "proxy_dns_group", font_red..bold_on..translate("Fallback DNS Proxy Group (Support Regex)")..bold_off..font_off)
+o.description = translate("Group Use For Proxy The Fallback DNS, Preventing DNS Lookup Failures")..translate("(Only Meta Core)")
+local groupnames,filename
+filename = m.uci:get("openclash", "config", "config_path")
+if filename then
+	groupnames = SYS.exec(string.format('ruby -ryaml -rYAML -I "/usr/share/openclash" -E UTF-8 -e "YAML.load_file(\'%s\')[\'proxy-groups\'].each do |i| puts i[\'name\']+\'##\' end" 2>/dev/null',filename))
+	if groupnames then
+		for groupname in string.gmatch(groupnames, "([^'##\n']+)##") do
+			if groupname ~= nil and groupname ~= "" then
+				o:value(groupname)
+			end
+		end
+	end
+end
+
+o:value("DIRECT")
+o:value("Disable", translate("Disable"))
+o.default = "Disable"
+o.rempty = false
+
 o = s:taboption("dns", Flag, "append_wan_dns", translate("Append Upstream DNS"))
 o.description = translate("Append The Upstream Assigned DNS And Gateway IP To The Nameserver")
 o.default = 1
@@ -265,6 +286,18 @@ o = s:taboption("meta", Flag, "enable_tcp_concurrent", font_red..bold_on..transl
 o.description = font_red..bold_on..translate("TCP Concurrent Request IPs, Choose The Lowest Latency One To Connection")..bold_off..font_off
 o.default = "0"
 
+o = s:taboption("meta", Flag, "enable_unified_delay", font_red..bold_on..translate("Enable Unified Delay")..bold_off..font_off)
+o.description = font_red..bold_on..translate("Change The Delay Calculation Method To Remove Extra Delays Such as Handshaking")..bold_off..font_off
+o.default = "0"
+
+o = s:taboption("meta", ListValue, "keep_alive_interval", font_red..bold_on..translate("TCP Keep-alive Interval(s)")..bold_off..font_off)
+o.description = font_red..bold_on..translate("Change The TCP Keep-alive Interval, Selecting a Larger Value Avoids Abnormal Resource Consumption")..bold_off..font_off
+o:value("0", translate("Disable"))
+o:value("15")
+o:value("1800")
+o:value("3600")
+o.default = "0"
+
 o = s:taboption("meta", ListValue, "find_process_mode", translate("Enable Process Rule"))
 o.description = translate("Whether to Enable Process Rules, If You Are Not Sure, Please Choose off Which Useful in Router Environment")
 o:value("0", translate("Disable"))
@@ -294,11 +327,9 @@ o:value("memconservative", translate("Memconservative"))
 o:value("standard", translate("Standard"))
 o.default = "0"
 
-o = s:taboption("meta", ListValue, "enable_geoip_dat", translate("Enable GeoIP Dat"))
+o = s:taboption("meta", Flag, "enable_geoip_dat", translate("Enable GeoIP Dat"))
 o.description = translate("Replace GEOIP MMDB With GEOIP Dat, Large Size File")..", "..font_red..bold_on..translate("Need Download First")..bold_off..font_off
 o.default = 0
-o:value("0", translate("Disable"))
-o:value("1", translate("Enable"))
 
 o = s:taboption("meta", Flag, "enable_meta_sniffer", font_red..bold_on..translate("Enable Sniffer")..bold_off..font_off)
 o.description = font_red..bold_on..translate("Sniffer Will Prevent Domain Name Proxy and DNS Hijack Failure")..bold_off..font_off
@@ -390,7 +421,7 @@ o.default = 0
 custom_rules = s:taboption("rules", Value, "custom_rules")
 custom_rules:depends("enable_custom_clash_rules", 1)
 custom_rules.template = "cbi/tvalue"
-custom_rules.description = translate("Custom Priority Rules Here, For More Go:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"https://lancellc.gitbook.io/clash/clash-config-file/rules\")'>https://lancellc.gitbook.io/clash/clash-config-file/rules</a>".." ,"..translate("IP To CIDR:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"http://ip2cidr.com\")'>http://ip2cidr.com</a>"
+custom_rules.description = font_green..bold_on..translate("(Priority)")..bold_off..font_off.." "..translate("Custom Rules Here, For More Go:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"https://lancellc.gitbook.io/clash/clash-config-file/rules\")'>https://lancellc.gitbook.io/clash/clash-config-file/rules</a>".." ,"..translate("IP To CIDR:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"http://ip2cidr.com\")'>http://ip2cidr.com</a>"
 custom_rules.rows = 20
 custom_rules.wrap = "off"
 
@@ -410,7 +441,7 @@ end
 custom_rules_2 = s:taboption("rules", Value, "custom_rules_2")
 custom_rules_2:depends("enable_custom_clash_rules", 1)
 custom_rules_2.template = "cbi/tvalue"
-custom_rules_2.description = translate("Custom Extended Rules Here, For More Go:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"https://lancellc.gitbook.io/clash/clash-config-file/rules\")'>https://lancellc.gitbook.io/clash/clash-config-file/rules</a>".." ,"..translate("IP To CIDR:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"http://ip2cidr.com\")'>http://ip2cidr.com</a>"
+custom_rules_2.description = font_green..bold_on..translate("(Extended)")..bold_off..font_off.." "..translate("Custom Rules Here, For More Go:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"https://lancellc.gitbook.io/clash/clash-config-file/rules\")'>https://lancellc.gitbook.io/clash/clash-config-file/rules</a>".." ,"..translate("IP To CIDR:").." ".."<a href='javascript:void(0)' onclick='javascript:return winOpen(\"http://ip2cidr.com\")'>http://ip2cidr.com</a>"
 custom_rules_2.rows = 20
 custom_rules_2.wrap = "off"
 
