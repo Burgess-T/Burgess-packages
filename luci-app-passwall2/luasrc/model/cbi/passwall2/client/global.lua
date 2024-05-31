@@ -316,7 +316,7 @@ o.rmempty = false
 o = s:taboption("DNS", Button, "clear_ipset", translate("Clear IPSet"), translate("Try this feature if the rule modification does not take effect."))
 o.inputstyle = "remove"
 function o.write(e, e)
-	luci.sys.call("[ -n \"$(nft list sets 2>/dev/null | grep \"passwall2_\")\" ] && sh /usr/share/" .. appname .. "/nftables.sh flush_nftset || sh /usr/share/" .. appname .. "/iptables.sh flush_ipset > /dev/null 2>&1 &")
+	luci.sys.call('[ -n "$(nft list sets 2>/dev/null | grep \"passwall2_\")" ] && sh /usr/share/passwall2/nftables.sh flush_nftset_reload || sh /usr/share/passwall2/iptables.sh flush_ipset_reload > /dev/null 2>&1 &')
 	luci.http.redirect(api.url("log"))
 end
 
@@ -329,7 +329,8 @@ for k, v in pairs(nodes_table) do
 end
 
 s:tab("log", translate("Log"))
-o = s:taboption("log", Flag, "close_log", translate("Close Node Log"))
+o = s:taboption("log", Flag, "log_node", translate("Enable Node Log"))
+o.default = "1"
 o.rmempty = false
 
 loglevel = s:taboption("log", ListValue, "loglevel", translate("Log Level"))

@@ -7,13 +7,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=alist
-PKG_VERSION:=3.33.0
-PKG_WEB_VERSION:=3.33.0
-PKG_RELEASE:=4
+PKG_VERSION:=3.35.0
+PKG_WEB_VERSION:=3.35.0
+PKG_RELEASE:=7
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/alist-org/alist/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=28aea1ddae1f394b9d66ca95cf25ab86cf30cce94544783ce7ea440f15d95f77
+PKG_HASH:=e349a178cd41fff9b668e9d8df9ff1b407b7f6d6fd3dbb2f8a7ca9d0d5ecad55
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILE:=LICENSE
@@ -23,7 +23,7 @@ define Download/$(PKG_NAME)-web
   FILE:=$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
   URL_FILE:=dist.tar.gz
   URL:=https://github.com/alist-org/alist-web/releases/download/$(PKG_WEB_VERSION)/
-  HASH:=50ae0539720bce7c470ac6bc47216b0e103e73636ee3a9b4b9364e2b52ca93f6
+  HASH:=940608c2b9f64cf585ad4d241545e5f1e59e5f6e54ef8ea2c9c3a29998313fc7
 endef
 
 PKG_BUILD_DEPENDS:=golang/host
@@ -58,6 +58,14 @@ define Package/$(PKG_NAME)/description
   A file list program that supports multiple storage, powered by Gin and Solidjs.
 endef
 
+ifeq ($(ARCH),arm)
+  ARM_CPU_FEATURES:=$(word 2,$(subst +,$(space),$(call qstrip,$(CONFIG_CPU_TYPE))))
+  ifeq ($(ARM_CPU_FEATURES),)
+    TARGET_CFLAGS:=
+    TARGET_LDFLAGS:=
+  endif
+endif
+
 ifneq ($(CONFIG_USE_MUSL),)
   TARGET_CFLAGS += -D_LARGEFILE64_SOURCE
 endif
@@ -66,6 +74,9 @@ define Build/Prepare
 	$(call Build/Prepare/Default)
 	$(eval $(call Download,$(PKG_NAME)-web))
 	$(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/public/dist -xzf $(DL_DIR)/$(PKG_NAME)-web-$(PKG_WEB_VERSION).tar.gz
+ifneq ($(CONFIG_ARCH_64BIT),y)
+	$(RM) -rf $(PKG_BUILD_DIR)/{drivers/lark.go,drivers/lark}
+endif
 endef
 
 define Package/$(PKG_NAME)/install
