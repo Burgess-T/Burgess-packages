@@ -618,7 +618,7 @@ o:depends({type = "v2ray", v2ray_protocol = "socks"})
 
 -- 传输协议
 o = s:option(ListValue, "transport", translate("Transport"))
-o:value("tcp", "TCP")
+o:value("raw", "RAW (TCP)")
 o:value("kcp", "mKCP")
 o:value("ws", "WebSocket")
 o:value("httpupgrade", "HTTPUpgrade")
@@ -634,10 +634,10 @@ o:depends({type = "v2ray", v2ray_protocol = "shadowsocks"})
 o:depends({type = "v2ray", v2ray_protocol = "socks"})
 o:depends({type = "v2ray", v2ray_protocol = "http"})
 
--- [[ TCP部分 ]]--
+-- [[ RAW部分 ]]--
 -- TCP伪装
 o = s:option(ListValue, "tcp_guise", translate("Camouflage Type"))
-o:depends("transport", "tcp")
+o:depends("transport", "raw")
 o:value("none", translate("None"))
 o:value("http", "HTTP")
 o.rmempty = true
@@ -924,15 +924,20 @@ if is_finded("xray") then
 	-- [[ XTLS ]]--
 	o = s:option(ListValue, "tls_flow", translate("Flow"))
 	for _, v in ipairs(tls_flows) do
-		o:value(v, translate(v))
+		if v == "none" then
+		   o.default = "none"
+		   o:value("none", translate("none"))
+		else
+		    o:value(v, translate(v))
+		end
 	end
 	o.rmempty = true
-	o:depends({type = "v2ray", v2ray_protocol = "vless", transport = "tcp", tls = true})
-	o:depends({type = "v2ray", v2ray_protocol = "vless", transport = "tcp", reality = true})
+	o:depends({type = "v2ray", v2ray_protocol = "vless", transport = "raw", tls = true})
+	o:depends({type = "v2ray", v2ray_protocol = "vless", transport = "raw", reality = true})
 
 	-- [[ uTLS ]]--
-	o = s:option(Value, "fingerprint", translate("Finger Print"))
-	o.default = "chrome"
+	o = s:option(ListValue, "fingerprint", translate("Finger Print"))
+	o.default = ""
 	o:value("chrome", translate("chrome"))
 	o:value("firefox", translate("firefox"))
 	o:value("safari", translate("safari"))
@@ -951,6 +956,7 @@ end
 o = s:option(Value, "tls_host", translate("TLS Host"))
 o.datatype = "hostname"
 o:depends("tls", true)
+o:depends("xtls", true)
 o:depends("reality", true)
 o.rmempty = true
 
@@ -1010,7 +1016,7 @@ o:depends("mux", true)
 
 
 -- [[ MPTCP ]]--
-o = s:option(Flag, "mptcp", translate("MPTCP"))
+o = s:option(Flag, "mptcp", translate("MPTCP"), translate("Enabling MPTCP Requires Server Support."))
 o.rmempty = false
 o.default = false
 o:depends({type = "v2ray", v2ray_protocol = "vless"})
